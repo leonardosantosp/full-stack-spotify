@@ -107,10 +107,6 @@ A aplicação estará presente no endereço `http://localhost:5173/`
 ![image](https://github.com/user-attachments/assets/2d4432ae-64f6-4204-853c-0510ede3165b)
 
 ## <br><br>Observações
-As músicas foram obtidas do Spotify via Top Musics Brasil.
-<br>
-<br>
-Somente 20 músicas estão na base de dados, 1 para cada artista, então as músicas são todas iguais para um dado artista.
-<br>
-<br>
-O player pode levar alguns segundos para iniciar.
+- As músicas foram obtidas do Spotify via Top Musics Brasil.
+- Somente 20 músicas estão na base de dados, 1 para cada artista, então as músicas são todas iguais para um dado artista.
+- O player pode levar alguns segundos para iniciar.
