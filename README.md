@@ -96,7 +96,7 @@ isso irá ativar a api que se comunica com a base de dados na porta `:3001` .
 ```bash
 npm run dev
 ```
-
+A aplicação estará presente no endereço `http://localhost:5173/`
 ## <br><br>Home
 ![image](https://github.com/user-attachments/assets/6de7aa1d-784b-4b25-b7d2-0fe3a64d6701)
 
