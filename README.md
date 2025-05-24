@@ -1,5 +1,15 @@
 # full-stack-spotify
 
+![Status](https://img.shields.io/badge/status-completo-green)
+![License](https://img.shields.io/badge/license-MIT-blue)
+
+Este é um projeto full stack que simula funcionalidades básicas do Spotify, com autenticação, exibição de músicas, artistas e reprodução de áudio.
+
+## 🚀 Deploy
+
+- 🔗 Frontend: [Acesse aqui](https://full-stack-spotify-frontend-production.up.railway.app/)
+- 🔗 Backend: [Acesse aqui](https://full-stack-spotify-api-production.up.railway.app/)
+
 ## <br> 📝 Descrição
 
 Projeto full-stack que simula uma interface do Spotify, permitindo explorar artistas e músicas. O backend foi desenvolvido em Node.js com Express e utiliza um banco de dados mongodb para armazenar informações sobre músicas e artistas. O frontend, feito em React, exibe as músicas e permite sua reprodução através de um player integrado.
