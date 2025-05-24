@@ -4,6 +4,7 @@ import { Link, useParams } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import SongList from '../components/SongList'
 import { getArtists, getSongs } from '../../api/api'
+import { LoadingScreen } from '../components/LoadingScreen'
 
 const Artist = () => {
   const { id } = useParams()
@@ -22,7 +23,7 @@ const Artist = () => {
   }, [])
 
   if (artistArray.length === 0 || songsArray.length === 0) {
-    return <p>Carregando...</p>
+    return <LoadingScreen />
   }
 
   const artistObj = artistArray.find(artist => artist._id === id)

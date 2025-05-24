@@ -2,6 +2,7 @@ import Player from '../components/Player'
 import { Link, useParams } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import { getArtists, getSongs } from '../../api/api'
+import { LoadingScreen } from '../components/LoadingScreen'
 
 const Song = () => {
   const { id } = useParams()
@@ -20,7 +21,7 @@ const Song = () => {
   }, [])
 
   if (songsArray.length === 0 || artistArray.length === 0) {
-    return <p>Carregando...</p>
+    return <LoadingScreen />
   }
 
   const currentSong = songsArray.find(song => song._id === id)
