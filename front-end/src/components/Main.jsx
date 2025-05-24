@@ -1,8 +1,22 @@
 import ItemList from './ItemList'
-import { artistArray } from '../assets/database/artists'
-import { songsArray } from '../assets/database/songs'
+import { getArtists, getSongs } from '../../api/api'
+import { useEffect, useState } from 'react'
 
 const Main = ({ type }) => {
+  const [artistArray, setArtistArray] = useState([])
+  const [songsArray, setSongsArray] = useState([])
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const artistData = await getArtists()
+      const songsData = await getSongs()
+      setArtistArray(artistData)
+      setSongsArray(songsData)
+    }
+
+    fetchData()
+  }, [])
+
   return (
     <div className="main">
       {type === 'artists' || type === undefined ? (

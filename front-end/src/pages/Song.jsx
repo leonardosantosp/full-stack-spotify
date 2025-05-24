@@ -1,26 +1,48 @@
 import Player from '../components/Player'
 import { Link, useParams } from 'react-router-dom'
-import { artistArray } from '../assets/database/artists'
-import { songsArray } from '../assets/database/songs'
+import { useState, useEffect } from 'react'
+import { getArtists, getSongs } from '../../api/api'
 
 const Song = () => {
   const { id } = useParams()
-  const { image, name, duration, artist, audio } = songsArray.filter(
-    currentSongObj => currentSongObj._id === id
-  )[0]
+  const [artistArray, setArtistArray] = useState([])
+  const [songsArray, setSongsArray] = useState([])
 
-  const artistObj = artistArray.filter(
-    currentArtistObj => currentArtistObj.name === artist
-  )[0]
+  useEffect(() => {
+    const fetchData = async () => {
+      const artistData = await getArtists()
+      const songsData = await getSongs()
+      setArtistArray(artistData)
+      setSongsArray(songsData)
+    }
 
-  const songsArrayFromArtist = songsArray.filter(
-    currentSongObj => currentSongObj.artist === artist
-  )
+    fetchData()
+  }, [])
 
-  const randomIndex = Math.floor(
-    Math.random() * (songsArrayFromArtist.length - 1)
-  )
-  const randomIdFromArtist = songsArrayFromArtist[randomIndex]._id
+  if (songsArray.length === 0 || artistArray.length === 0) {
+    return <p>Carregando...</p>
+  }
+
+  const currentSong = songsArray.find(song => song._id === id)
+
+  if (!currentSong) {
+    return <p>Música não encontrada</p>
+  }
+
+  const { image, name, duration, artist, audio } = currentSong
+
+  const artistObj = artistArray.find(artistItem => artistItem.name === artist)
+
+  if (!artistObj) {
+    return <p>Artista não encontrado</p>
+  }
+
+  const songsArrayFromArtist = songsArray.filter(song => song.artist === artist)
+  let randomIdFromArtist = null
+  if (songsArrayFromArtist.length > 1) {
+    const randomIndex = Math.floor(Math.random() * songsArrayFromArtist.length)
+    randomIdFromArtist = songsArrayFromArtist[randomIndex]._id
+  }
 
   return (
     <div className="song">

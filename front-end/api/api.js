@@ -3,8 +3,12 @@ import axios from 'axios'
 
 const URL = 'http://localhost:3001'
 
-const responseArtists = await axios.get(`${URL}/artists`)
-const responseSongs = await axios.get(`${URL}/songs`)
+export const getSongs = async () => {
+  const responseSongs = await axios.get(`${URL}/songs`)
+  return responseSongs.data
+}
 
-export const artistArray = responseArtists.data
-export const songsArray = responseSongs.data
+export const getArtists = async () => {
+  const responseArtists = await axios.get(`${URL}/artists`)
+  return responseArtists.data
+}

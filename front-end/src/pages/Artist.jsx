@@ -1,21 +1,58 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCirclePlay } from '@fortawesome/free-solid-svg-icons/faCirclePlay'
 import { Link, useParams } from 'react-router-dom'
+import { useState, useEffect } from 'react'
 import SongList from '../components/SongList'
-import { artistArray } from '../assets/database/artists'
-import { songsArray } from '../assets/database/songs'
+import { getArtists, getSongs } from '../../api/api'
 
 const Artist = () => {
   const { id } = useParams()
-  const { name, banner } = artistArray.filter(
-    currentArtistObj => currentArtistObj._id === id
-  )[0]
-  const songsArrayFromArtist = songsArray.filter(
-    currentSongObj => currentSongObj.artist === name
-  )
-  const randomIndex = Math.floor(
-    Math.random() * (songsArrayFromArtist.length - 1)
-  )
+  const [artistArray, setArtistArray] = useState([])
+  const [songsArray, setSongsArray] = useState([])
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const artistData = await getArtists()
+      const songsData = await getSongs()
+      setArtistArray(artistData)
+      setSongsArray(songsData)
+    }
+
+    fetchData()
+  }, [])
+
+  if (artistArray.length === 0 || songsArray.length === 0) {
+    return <p>Carregando...</p>
+  }
+
+  const artistObj = artistArray.find(artist => artist._id === id)
+
+  if (!artistObj) {
+    return <p>Artista não encontrado</p>
+  }
+
+  const { name, banner } = artistObj
+
+  const songsArrayFromArtist = songsArray.filter(song => song.artist === name)
+
+  if (songsArrayFromArtist.length === 0) {
+    return (
+      <div className="artist">
+        <div
+          className="artist__header"
+          style={{
+            backgroundImage: `linear-gradient(to bottom, var(--_shade), var(--_shade)), url(${banner})`
+          }}
+        >
+          <h2 className="artist__title">{name}</h2>
+        </div>
+        <p>Sem músicas disponíveis para este artista.</p>
+      </div>
+    )
+  }
+
+  // Gerar índice aleatório dentro do range válido
+  const randomIndex = Math.floor(Math.random() * songsArrayFromArtist.length)
   const randomIdFromArtist = songsArrayFromArtist[randomIndex]._id
 
   return (
