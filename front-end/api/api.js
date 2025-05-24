@@ -1,7 +1,7 @@
 // Fetch ou Axios
 import axios from 'axios'
 
-const URL = 'https://full-stack-spotify-api-production.up.railway.app/'
+const URL = 'https://full-stack-spotify-api-production.up.railway.app'
 
 export const getSongs = async () => {
   const responseSongs = await axios.get(`${URL}/songs`)
